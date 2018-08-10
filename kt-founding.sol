@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.22;
 /// @title Founding Knowledge Token
 contract ktfounding {
 
@@ -9,29 +9,30 @@ contract ktfounding {
   mapping(address => uint) public ktowners;
 
   // Constructor
-  function ktfounding(){
+   constructor() public {
     genesis = msg.sender;
+    dkt = 9911221;
   }
 
-  function newd () returns(bool successful) {
+  function newd () public returns(bool successful) {
   	dkt = 888;
   	return true;
   }
 
-  function getd() constant returns(uint) {
+  function getd() public constant returns(uint) {
      return dkt;
   }
 
-  function newktclaim (address receiver) returns(bool successful) {
+  function newktclaim (address receiver) public returns(bool successful) {
   	ktowners[receiver] = 888;
   	return true;
   }
 
-  function verifykt(address receiver) constant returns(uint) {
+  function verifykt(address receiver) public constant returns(uint) {
      return ktowners[receiver];
   }
 
-  function remove() {
+  function remove() private {
     if (msg.sender == genesis){
       selfdestruct(genesis);
     }
